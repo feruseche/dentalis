@@ -14,3 +14,9 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('categorias', function () {
+    // return view('welcome');
+    // return "Bienvenido a Categorias.";
+	return view('categorias');
+});
