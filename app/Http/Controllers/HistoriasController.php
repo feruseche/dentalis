@@ -11,6 +11,8 @@ use Illuminate\Http\Request;
 
 
 
+
+
 class HistoriasController extends Controller
 {
     //
@@ -60,22 +62,45 @@ class HistoriasController extends Controller
     }
 
 
- public function show(Request $id)
+ public function show($id)
     {
 
-				//dd($id);
-
-	        	//$idh=trim($id);
+    			//dd($id);
+    			//return view("historias.historia.show",["historia"=>Historias::findOrFail($id)]);
+	            
 	            $historias=DB::table('pacientes')
-					->where('historia','=',$id);
+					->where('historia','=',$id)
+					->orderBy('historia','asc')
+			        ->paginate(5);
 
-		        $nr=$historias->count();
+			    $pacientes_patologias=DB::table('pacientes_patologias')
+					->where('historia','=',$id)
+					->orderBy('id_patologia','asc')
+			        ->paginate(50);
 
-		        return view('historias.historia',["historias"=>$historias,"searchText"=>"l","nr"=>$nr]);
-	        	//return (["historias"=>$historias]);
+			    $patologias=DB::table('patologias')
+					->orderBy('id_patologia','asc')
+			        ->paginate(500);			    
+
+			    $pruebadejoin=DB::table('pacientes_patologias as pp')
+			    	 ->join('pacientes', 'pp.historia','=', $id)
+			    	 ->join('patologias as p','p.id_patologia','=','pp.id_patologia')
+			    	 ->select('pacientes.paciente','pp.historia','p.patologia','pp.valor');
+			    	 
+			    $tratamientos=DB::table('presupuestos')
+			    	->where('historia','=',$id)
+					->orderBy('fecha','ASC')
+					->paginate(500);
+
+		        $nr=$tratamientos->count();
+				
+				//dd($prueba);
+				//return $prueba->pacientes.paciente;
+
+		        return view('historias.detalle',["historias"=>$historias,"tratamientos"=>$tratamientos,"patologias"=>$patologias,"pacientes_patologias"=>$pacientes_patologias,"nr"=>$nr]);
+	        	
         	
-        	//return view("historias.show")->with(['id' => $id]);
-        	//,["historia"=>pacientes::findOrFail($id)]);
+        	
     
     }
 

@@ -3,6 +3,7 @@
 
 
 
+
           <div class="row">
             <div class="col-md-12">
               <div class="box">
@@ -36,7 +37,7 @@
                               <div class="table-responsive">
                                 <table class="table table-condensed table-hover">
                                   @foreach($historias as $paciente)
-
+                                    
                                     <tr>
                                       <td width="60px">
                                             
@@ -59,7 +60,9 @@
                                                   }
                                                 
                                             ?>  
+                                            <a href="{{ route('detalle', ['id' => $paciente->historia]) }}">
                                             <img src="{{ $ruta_foto }}" class="img-circle" alt="User Image" width="56px" height="56px">
+                                            </a>
                                       </td>
                                       <td>
                                           <strong>{{ $paciente->paciente }}<br /></strong>
@@ -85,8 +88,6 @@
                                           <i>{{ $paciente->telefono_movil }} - {{ $paciente->email }}</i>
                                       </td>
                                       <td>
-                                        <!-- <a href="{{ route('detalle', ['id' => $paciente->historia]) }}"><button class="btn btn-info">Consultar</button></a>
-                                        -->
                                       </td>
                                     </tr>
                                   
@@ -109,7 +110,6 @@
               </div><!-- /.box -->
             </div><!-- /.col-md-12 -->
           </div><!-- /.row -->
-
 
 
 @endsection

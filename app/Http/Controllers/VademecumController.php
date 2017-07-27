@@ -58,24 +58,24 @@ public function filtro(Request $request)
 		if ($request)
 		        {
 		           $query = trim($request->get('searchText'));
-	            $vademecum = DB::table('vademecum_productos')
-							->where('producto','LIKE','%'.$query.'%')
-		        			->orderBy('id_producto','asc')
-		        			->paginate(500);
+		            $vademecum = DB::table('vademecum_productos')
+								->where('producto','LIKE','%'.$query.'%')
+			        			->orderBy('id_producto','asc')
+			        			->paginate(500);
 
-				$dosis = DB::table('vademecum_dosis')
-							//->where('producto','LIKE','%'.$query.'%')
-		        			->orderBy('id_producto','asc')
-		        			->paginate(500);
+					$dosis = DB::table('vademecum_dosis')
+								//->where('producto','LIKE','%'.$query.'%')
+			        			->orderBy('id_producto','asc')
+			        			->paginate(500);
 
-				$grupos = DB::table('vademecum_grupos')
-							//->where('producto','LIKE','%'.$query.'%')
-		        			->orderBy('id_grupo','asc')
-		        			->paginate(500);		        			
+					$grupos = DB::table('vademecum_grupos')
+								//->where('producto','LIKE','%'.$query.'%')
+			        			->orderBy('id_grupo','asc')
+			        			->paginate(500);		        		
 
-		        $nr=$vademecum->count();
+			        $nr=$vademecum->count();
 
-			    return view('vademecum.index',["vademecum"=>$vademecum,"dosis"=>$dosis,"grupos"=>$grupos,"searchText"=>$query,"nr"=>$nr]);
+			    	return view('vademecum.index',["vademecum"=>$vademecum,"dosis"=>$dosis,"grupos"=>$grupos,"searchText"=>$query,"nr"=>$nr]);
 		        }
 
     }    

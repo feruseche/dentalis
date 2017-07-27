@@ -29,7 +29,7 @@
                                 <table class="table table-condensed table-hover">
                                   @foreach($vademecum as $producto)
 
-                                    <tr>
+                                    <tr class="info">
                                       <td>
                                             
                                             <?php 
@@ -55,7 +55,13 @@
                                             ?>  
                                             <img src="{{ $ruta_foto }}" class="img-rounded" alt="User Image" width="84px" height="56px">
                                           <strong>{{ $producto->producto }}</strong>
-                                          
+                                      </td>
+                                      
+                                    </tr>
+                                    <tr>
+
+                                      <td>
+
                                           @foreach($grupos as $grupo)
 
                                             <?php
@@ -87,8 +93,6 @@
                                           @endforeach
 
                                           </ul>
-                                      </td>
-                                      <td>
                                       </td>
                                     </tr>
                                   

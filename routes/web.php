@@ -23,7 +23,9 @@ Route::get('/historias.historia','HistoriasController@index');
 
 Route::get('/historias.filtro','HistoriasController@filtro');
 
-Route::name('detalle')->get('/historias/detalle/{id}', 'HistoriasController@show');
+Route::name('detalle')->get('/historias.detalle.{id}', 'HistoriasController@show');
+
+
 
 
 Route::get('/odontologos.index','OdontologosController@index');
