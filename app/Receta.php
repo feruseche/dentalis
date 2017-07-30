@@ -4,12 +4,12 @@ namespace dentalis;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Historias extends Model
+class Receta extends Model
 {
     //
-    protected $table='pacientes';
+  protected $table='pacientes_recipes';
 
-    protected $primaryKey='historia';
+    protected $primaryKey='id_recipe';
 
     public $timestamps=false;
 
@@ -24,4 +24,10 @@ class Historias extends Model
     protected $guarded =[
 
     ];
+
+    public function scopeRecetas($query, $id){
+
+        return $query->where('historia',$id)->orderBy('fecha','desc');
+
+    }    
 }

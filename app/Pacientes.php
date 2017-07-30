@@ -4,9 +4,10 @@ namespace dentalis;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Historias extends Model
+class Pacientes extends Model
 {
     //
+
     protected $table='pacientes';
 
     protected $primaryKey='historia';
@@ -24,4 +25,5 @@ class Historias extends Model
     protected $guarded =[
 
     ];
+
 }

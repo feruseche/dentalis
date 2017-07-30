@@ -1,7 +1,7 @@
 @extends('layouts.inicio')
 @section('contenido')
 
-{{ $historias }}
+{{ $consulta }}
 
 
 
@@ -27,7 +27,7 @@
                             <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
                               <h3>Listado de Historias 
                                   
-                                  @include('historias.search')
+                                  
 
                             </div>
                           </div>
@@ -42,7 +42,7 @@
                                     <th>Cédula</th>
                                     <th>Opciones</th>
                                   </thead>
-                                  @foreach ($historias as $historia)
+                                  @foreach ($consulta as $historia)
                                     <tr>
                                       <td>{{ $historia->historia }}</td>
                                       <td>{{ $historia->paciente }}</td>
@@ -51,11 +51,11 @@
                                         <a href=""><button class="btn btn-info">Consultar</button></a>
                                       </td>
                                     </tr>
-                                  <!-- @include('almacen.categoria.modal') -->
+
                                   @endforeach
                                 </table>
                               </div>
-                              {{ $historias->render() }}
+                              
                             </div>
                                 </div>
 		                          <!--Fin Contenido-->
