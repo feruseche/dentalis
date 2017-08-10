@@ -2,177 +2,114 @@
 @section('contenido')
 
 
-<section class="content">
-          <div class="row">
-            <div class="col-md-12">
-              <div class="box">
+<section class="">
+         
+<div class="row">
+  <div class="col-md-12">
+    <div class="box"> 
 
-                <div class="box-header with-border">
-                  @foreach($historias as $paciente)
+      <!-- /.box-header -->
+      <div class="box-body">
 
-                    <h1 class="box-title">Historia #00000{{ $paciente->historia }} - Datos Personales del Paciente</h1>
+        <div class="row">
+          <div class="col-md-12">
 
+            <!--Contenido Datos del Paciente-->
+            <div class="row">
+              <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="table-responsive">
+                  <table class="table table-condensed table-hover">
+                    @foreach($historias as $paciente)
+                    <tr>
+                    <td width="60px">
+                      <?php 
+                      //ruta del capture de la imagen del odontograma
+                      $ruta_odontograma = "fotos/odontogramas/".$paciente->historia.".bmp";
+                      //echo de la foto del paciente
+                      $ruta_img = "fotos/pacientes/p".$paciente->historia.".jpg"; //
+                      if(file_exists($ruta_img)){
+
+                        $ruta_foto = $ruta_img;
+
+                      }else{
+
+                        $ruta_foto = "fotos/pacientes/avatar.png";
+
+                      } ?>
+
+                      <img src="{{ $ruta_foto }}" class="img-circle" alt="User Image" width="98px" height="98px">
+                    </td>
+                    <td>
+                      <h3>{{ $paciente->paciente }}</h3>
+                      <?php
+                        $fecha = $paciente->fecha_nacimiento;
+                        $fecha = str_replace("/","-",$fecha);
+                        $fecha = date('Y/m/d',strtotime($fecha));
+                        $hoy = date('Y/m/d');
+                        $edad = $hoy - $fecha;
+                        $nacimiento = date('d/m/Y',strtotime($fecha));
+                      ?>
+                      <i>Fecha de Nacimiento: {{ $nacimiento }} - Edad: {{ $edad }} años</i><br />
+                      <i>Teléfono fijo: {{ $paciente->telefonos }} - Celular: {{ $paciente->telefono_movil }}</i>
+                      <i>Email: {{ $paciente->email }}</i>
+                      <br />
+                      <i>Dirección: {{ $paciente->direccion }}</i><br />
+                      <i>Ocupación: {{ $paciente->ocupacion }}</i>                                          
+                    </td>
+                    <td>
+                    </td>
+                  </tr>
                   @endforeach
-                  <div class="box-tools pull-right">
-                    <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-                    
-                    <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-                  </div>
-                </div>
-                
-                <!-- /.box-header -->
-                <div class="box-body">
-                    <div class="row">
-                      <div class="col-md-12">
-                        <!--Contenido-->
-                        <div class="row">
-
-                          <!-- <div class="row"> -->
-                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                              <div class="table-responsive">
-                                <table class="table table-condensed table-hover">
-                                  @foreach($historias as $paciente)
-
-                                    <tr>
-                                      <td width="60px">
-                                            
-                                            <?php 
-                                            //ruta del odontograma
-                                                $ruta_odontograma = "fotos/odontogramas/".$paciente->historia.".bmp";
-
-                                                $ruta_img = "fotos/pacientes/p".$paciente->historia.".jpg"; //
-                                                //echo $ruta_img
-
-                                                if(file_exists($ruta_img)) // Debo saber si existe esta foto
-                                                  {
-
-                                                    $ruta_foto = $ruta_img;
-                                                    //echo $ruta_foto;
-                                                  
-                                                  }else{
-                                                  
-                                                    //echo "No esta la imagen ".$ruta_img;
-                                                    $ruta_foto = "fotos/pacientes/avatar.png";
-
-                                                  }
-                                                
-                                            ?>  
-                                            <img src="{{ $ruta_foto }}" class="img-circle" alt="User Image" width="98px" height="98px">
-                                      </td>
-                                      <td>
-                                          <strong>{{ $paciente->paciente }}</strong><br />
-
-
-                                          <?php
-
-                                              $fecha = $paciente->fecha_nacimiento;
-
-                                              $fecha = str_replace("/","-",$fecha);
-
-                                              $fecha = date('Y/m/d',strtotime($fecha));
-
-                                              $hoy = date('Y/m/d');
-
-                                              $edad = $hoy - $fecha;
-
-                                              $nacimiento = date('d/m/Y',strtotime($fecha));
-
-
-                                          ?>
-                                          <i>Fecha de Nacimiento: {{ $nacimiento }} - Edad: {{ $edad }} años</i><br />
-                                          <i>Teléfono fijo: {{ $paciente->telefonos }} - Celular: {{ $paciente->telefono_movil }}</i>
-                                          <i>Email: {{ $paciente->email }}</i>
-                                          <br />
-                                          <i>Dirección: {{ $paciente->direccion }}</i><br />
-                                          <i>Ocupación: {{ $paciente->ocupacion }}</i>                                          
-                                      </td>
-                                      <td>
-                            
-                                      </td>
-                                    </tr>
-                                  
-                                  @endforeach
-                                </table>
-                              </div>
-                            </div>
-                        </div>                            
-                      </div>
-
-                              <!--Fin Contenido-->
-                    </div>
-                </div>
-
-              </div><!-- /.box -->
-            </div><!-- /.col-md-12 -->
-          </div><!-- /.row -->
-
-
-
-
-
-    <div class="row">
-      <div class="col-md-12">
-        <div class="box">
-          <div class="box-header with-border">
-              <h1 class="box-title">Anamnesis</h1>
-            <div class="box-tools pull-right">
-              <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-              <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-            </div>
-          </div>
-          <!-- /.box-header -->
-          <div class="box-body">
-              <div class="row">
-                <div class="col-md-12">
-                  <!--Contenido-->
-                   <div class="row">
-                    <!-- <div class="row"> -->
-                      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                        <div class="table-responsive">
-                          <table class="table table-condensed table-hover">
-                            <tr>
-                              <td>
-                              <ul>
-                                    @foreach($patologias as $patologia)
-
-                                      <?php
-                                        $patog=trim($patologia->id_patologia);
-                                      ?>
-                                      
-                                      @foreach($pacientes_patologias as $patologia_paciente)
-                                      
-                                      <?php
-                                        $patop=trim($patologia_paciente->id_patologia);
-                                        if($patog == $patop )
-                                          {
-                                      ?>
-                                            <li>
-                                              
-                                              <strong>{{ $patologia->patologia }}=> </strong><i>{{ $patologia_paciente->valor }}</i>
-                                              
-                                            </li>  
-                                            
-                                      <?php
-                                          }
-                                      ?>      
-                                      @endforeach  
-
-                                    @endforeach
-
-                                </ul>
-                              </td>
-                            </tr>                            
-                          </table>
-                        </div>
-                      </div>
-                    </div>                            
-                    </div>
-                        <!--Fin Contenido-->
+                  </table>
                 </div>
               </div>
-        </div><!-- /.box -->
-      </div><!-- /.col-md-12 -->
-    </div><!-- /.row -->
+            </div>                            
+          </div>
+        </div> <!-- Fin del row del contenido de los datos personales del paciente
+        <!--Fin Contenido de los datos del paciente-->
+
+        <!--Inicio del contenido del Anamnesis-->
+
+        <div class="row">
+          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="table-responsive">
+            <h3>Anamnesis:</h3>
+              <table class="table table-condensed table-hover">
+                <tr>
+                  <td>
+                    <ul>
+                      @foreach($patologias as $patologia)
+                        <?php
+                          $patog=trim($patologia->id_patologia);
+                        ?>                      
+                        @foreach($pacientes_patologias as $patologia_paciente)                      
+                          <?php
+                          $patop=trim($patologia_paciente->id_patologia);
+                          if($patog == $patop ){ ?>
+                            <li>                        
+                              <strong>{{ $patologia->patologia }}=> </strong><i>{{ $patologia_paciente->valor }}</i>
+                            </li>                              
+                          <?php } ?>      
+                        @endforeach  
+                      @endforeach
+                    </ul>
+                  </td>
+                </tr>                            
+              </table>
+            </div>
+          </div>
+        </div>   
+        <!-- Fin del contenido del anamnesis --> 
+
+
+
+
+      </div> <!-- class row-body que contendrá varios rows de información -->
+    </div><!-- /.box -->
+  </div><!-- /.col-md-12 -->
+</div><!-- /.row -->
+
+
 
 
 
@@ -367,7 +304,7 @@
       <div class="col-md-12">
         <div class="box">
           <div class="box-header with-border">
-              <h1 class="box-title">Recetas Médicas</h1>
+              <h1 class="box-title">{{ $nrecetas }} Recetas Médicas</h1>
             <div class="box-tools pull-right">
               <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
               <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>

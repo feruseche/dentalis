@@ -8,6 +8,8 @@ use Illuminate\Support\Collection;
 
 use Illuminate\Http\Request;
 
+use dentalis\Receta;
+
 class HistoriasController extends Controller
 {
     //
@@ -99,15 +101,22 @@ class HistoriasController extends Controller
 			->select('pr.id_recipe','pr.fecha','pr.hora','pr.doctor','pr.codigo1','pr.codigo2','pr.indicaciones','prp.producto','prp.dosis')
 			->paginate(500);
 
-	    //dd($recetasp->count());
+		//$recetas3=Receta::where('historia',$id)
+			//->join('pacientes_recipes_productos as prp','pr.id_recipe','=','prp.id_recipe')
+			//->orderBy('fecha','DESC')
+			//->select('pr.id_recipe','pr.fecha','pr.hora','pr.doctor','pr.codigo1','pr.codigo2','pr.indicaciones','prp.producto','prp.dosis')
+		//	->paginate(500);
+
+	    //dd($recetas3);
 	    	 
 	    	//->join('pacientes', 'pp.historia','=', $id)
 	    	//->join('patologias as p','p.id_patologia','=','pp.id_patologia')
 	    	//->select('pacientes.paciente','pp.historia','p.patologia','pp.valor');
 
         $nr=$tratamientos->count();
+        $nrecetas=$recetas1->count();
 
-        return view('historias.detalle',["historias"=>$historias,"tratamientos"=>$tratamientos,"patologias"=>$patologias,"pacientes_patologias"=>$pacientes_patologias,"recetas1"=>$recetas1,"recetas2"=>$recetas2,"nr"=>$nr]);
+        return view('historias.detalle',["historias"=>$historias,"tratamientos"=>$tratamientos,"patologias"=>$patologias,"pacientes_patologias"=>$pacientes_patologias,"recetas1"=>$recetas1,"recetas2"=>$recetas2,"nr"=>$nr,"nrecetas"=>$nrecetas]);
 	        	    
     }
 
